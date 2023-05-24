@@ -16,10 +16,12 @@ void main() async {
   SharedPreferences preferences = await SharedPreferences.getInstance();
 
   bool isDark = await preferences.getBool('isDark') ?? false;
+  bool isFarenheit = await preferences.getBool('isFarenheit') ?? false;
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => DarkMode_Provider(darkMode_Model: DarkMode_Model(isDark: isDark))),
+        ChangeNotifierProvider(create: (context) => FarenheitMode_Provider(farenheitMode_Model: FarenheitMode_Model(isFarenheit: isFarenheit))),
         ChangeNotifierProvider(create: (context) => NetWorkConnectivity_Provider(),),
       ],
       builder: (context, child) {

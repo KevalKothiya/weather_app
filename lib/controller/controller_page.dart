@@ -22,6 +22,22 @@ class DarkMode_Provider extends ChangeNotifier {
     notifyListeners();
   }
 }
+class FarenheitMode_Provider extends ChangeNotifier {
+  FarenheitMode_Model farenheitMode_Model;
+
+  FarenheitMode_Provider({
+    required this.farenheitMode_Model,
+  });
+
+  AlternativeValue_Provided() async {
+    farenheitMode_Model.isFarenheit = !farenheitMode_Model.isFarenheit;
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+
+    await preferences.setBool("isFarenheit", farenheitMode_Model.isFarenheit);
+
+    notifyListeners();
+  }
+}
 
 class NetWorkConnectivity_Provider extends ChangeNotifier {
   Connectivity connectivity = Connectivity();

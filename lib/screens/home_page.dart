@@ -28,8 +28,43 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      bottom: false,
       child: Scaffold(
+        floatingActionButtonLocation: FloatingActionButtonLocation.endContained,
+        bottomNavigationBar: Stack(
+          alignment: Alignment(0, -1.4),
+          children: [
+            Container(
+              height: 7.h,
+              width: double.infinity,
+              color: Color(0xff2b3f64),
+            ),
+            Divider(
+              color: Colors.grey,
+            ),
+          ],
+        ),
+        floatingActionButton: Container(
+          padding: EdgeInsets.only(
+            left: 5.w,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  CupertinoIcons.map,
+                ),
+              ),
+              IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  CupertinoIcons.list_bullet,
+                ),
+              ),
+            ],
+          ),
+        ),
         body: (Provider.of<NetWorkConnectivity_Provider>(context)
                     .netWorkConnectivity_Model
                     .netWorkStatus ==
@@ -168,70 +203,231 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                         SliverToBoxAdapter(
-                          child: Container(
-                            padding: EdgeInsets.all(2.5.h),
-                            child: SingleChildScrollView(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text(
-                                      "Windy conditions from 17:30-21:30, with mostly clear conditions expected at 21:30"),
-                                  Divider(),
-                                  Container(
-                                    height: 150,
-                                    width: double.infinity,
-                                    color: Colors.yellow,
-                                    child: ListView.builder(
-                                      itemCount: data.hour.length,
-                                      shrinkWrap: true,
-                                      scrollDirection: Axis.horizontal,
-                                      itemBuilder: (context, i) {
-                                        return Container(
-                                          height: 100,
-                                          width: 17.w,
-                                          decoration: BoxDecoration(
-                                            color: Colors.primaries[i % 18].shade200,
-                                            borderRadius: BorderRadius.circular(
-                                              3.h,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 4.w),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Color(0xFF252847),
+                                borderRadius: BorderRadius.circular(4.h),
+                              ),
+                              padding: EdgeInsets.all(2.5.h),
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      "Windy conditions from 17:30-21:30, with mostly clear conditions expected at 21:30",
+                                      style: (Provider.of<DarkMode_Provider>(
+                                                  context,
+                                                  listen: false)
+                                              .darkMode_Model
+                                              .isDark)
+                                          ? AppThemes.darkThemeData.textTheme
+                                              .headlineLarge!
+                                              .copyWith(
+                                              fontSize: 2.h,
+                                              fontWeight: FontWeight.w100,
+                                            )
+                                          : AppThemes.lightThemeData.textTheme
+                                              .headlineLarge!
+                                              .copyWith(
+                                              color: Colors.white,
+                                              fontSize: 2.h,
+                                              fontWeight: FontWeight.w100,
                                             ),
-                                          ),
-                                          margin: EdgeInsets.all(5),
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                data.hour[i]['temp_c']
-                                                    .toString(),
-                                                style: TextStyle(
-                                                    color: Colors.white),
+                                    ),
+                                    Divider(),
+                                    Container(
+                                      height: 15.h,
+                                      width: double.infinity,
+                                      child: ListView.builder(
+                                        itemCount: data.hour.length,
+                                        shrinkWrap: true,
+                                        scrollDirection: Axis.horizontal,
+                                        itemBuilder: (context, i) {
+                                          return Container(
+                                            height: 100,
+                                            width: 17.w,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                3.h,
                                               ),
-                                              // Image(
-                                              //   image: NetworkImage(
-                                              //       "https:${data.hour[0]['icon']}"),
-                                              // ),
-                                              Container(
-                                                height: 50,
-                                                width: 50,
-                                                decoration: BoxDecoration(
-                                                  color: Colors.white,
-                                                  image: DecorationImage(
-                                                    image: NetworkImage(
-                                                      "https:${data.hour[i]['condition']['icon']}",
+                                            ),
+                                            margin: EdgeInsets.all(5),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                (i < 10)
+                                                    ? Text(
+                                                        "0${i}:00",
+                                                        style: TextStyle(
+                                                            color:
+                                                                Colors.white),
+                                                      )
+                                                    : Text(
+                                                        "${i}:00",
+                                                        style: TextStyle(
+                                                            color:
+                                                                Colors.white),
+                                                      ),
+                                                Container(
+                                                  height: 50,
+                                                  width: 50,
+                                                  decoration: BoxDecoration(
+                                                    image: DecorationImage(
+                                                      image: NetworkImage(
+                                                        "https:${data.hour[i]['condition']['icon']}",
+                                                      ),
+                                                      fit: BoxFit.cover,
                                                     ),
                                                   ),
                                                 ),
-                                              ),
-                                              Text(
-                                                data.tempInFarenheit.toString(),
-                                              ),
-                                            ],
-                                          ),
-                                        );
-                                      },
+                                                (Provider.of<FarenheitMode_Provider>(
+                                                            context,
+                                                            listen: false)
+                                                        .farenheitMode_Model
+                                                        .isFarenheit)
+                                                    ? Text(
+                                                        data.hour[i]['temp_f']
+                                                            .toString(),
+                                                        style: (Provider.of<
+                                                                        DarkMode_Provider>(
+                                                                    context,
+                                                                    listen:
+                                                                        false)
+                                                                .darkMode_Model
+                                                                .isDark)
+                                                            ? AppThemes
+                                                                .darkThemeData
+                                                                .textTheme
+                                                                .headlineLarge
+                                                            : AppThemes
+                                                                .lightThemeData
+                                                                .textTheme
+                                                                .headlineLarge!
+                                                                .copyWith(
+                                                                color: Colors
+                                                                    .white,
+                                                              ),
+                                                      )
+                                                    : Stack(
+                                                        alignment:
+                                                            Alignment(2, -1),
+                                                        children: [
+                                                          Text(
+                                                            data.hour[i]
+                                                                    ['temp_c']
+                                                                .toString(),
+                                                            style: (Provider.of<
+                                                                            DarkMode_Provider>(
+                                                                        context,
+                                                                        listen:
+                                                                            false)
+                                                                    .darkMode_Model
+                                                                    .isDark)
+                                                                ? AppThemes
+                                                                    .darkThemeData
+                                                                    .textTheme
+                                                                    .headlineLarge
+                                                                : AppThemes
+                                                                    .lightThemeData
+                                                                    .textTheme
+                                                                    .headlineLarge!
+                                                                    .copyWith(
+                                                                    color: Colors
+                                                                        .white,
+                                                                  ),
+                                                          ),
+                                                          CircleAvatar(
+                                                            radius: 0.5.h,
+                                                            backgroundColor:
+                                                                (Provider.of<DarkMode_Provider>(
+                                                                            context)
+                                                                        .darkMode_Model
+                                                                        .isDark)
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .black,
+                                                            child: CircleAvatar(
+                                                              radius: 0.25.h,
+                                                              backgroundColor:
+                                                                  (Provider.of<DarkMode_Provider>(
+                                                                              context)
+                                                                          .darkMode_Model
+                                                                          .isDark)
+                                                                      ? Colors
+                                                                          .black
+                                                                      : Colors
+                                                                          .white,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                              ],
+                                            ),
+                                          );
+                                        },
+                                      ),
                                     ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SliverToBoxAdapter(
+                          child: SizedBox(
+                            height: 2.5.h,
+                          ),
+                        ),
+                        SliverToBoxAdapter(
+                          child: Padding(
+                            padding: EdgeInsets.all(2.h),
+                            child: GridView.builder(
+                              shrinkWrap: true,
+                              itemCount: 6,
+                              itemBuilder: (context, i) => Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.primaries[i % 18],
+                                  borderRadius: BorderRadius.circular(
+                                    2.h,
                                   ),
-                                ],
+                                ),
+                                alignment: Alignment.center,
+                                child: (i <= 2)
+                                    ? (i <= 1)
+                                        ? (i == 1)
+                                // 1
+                                            ? Column(
+                                   children: [
+                                     Row(
+                                       mainAxisAlignment: MainAxisAlignment.start,
+                                       children: [
+                                         SizedBox(width: 4.w),
+                                         Text("Sunrise"),
+                                       ],
+                                     ),
+                                     Text(data.astro['sunrise'].toString()),
+                                   ],
+                                )
+                                            : Text("0")
+                                        : Text("2")
+                                    : (i >= 4)
+                                        ? (i == 4)
+                                            ? Text("4")
+                                            : Text("5")
+                                        : Text("3"),
+                              ),
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                childAspectRatio: 3 / 3,
+                                mainAxisSpacing: 2.h,
+                                crossAxisSpacing: 3.5.w,
                               ),
                             ),
                           ),
