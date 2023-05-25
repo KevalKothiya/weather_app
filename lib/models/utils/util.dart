@@ -14,7 +14,7 @@ class AppThemes {
   static ThemeData darkThemeData = ThemeData(
     useMaterial3: true,
     brightness: Brightness.dark,
-    colorSchemeSeed: Colors.white,
+    colorSchemeSeed: Colors.deepPurple,
     textTheme: TextTheme(
       headlineLarge: TextStyle(
         color: Colors.white,

@@ -39,6 +39,23 @@ class FarenheitMode_Provider extends ChangeNotifier {
   }
 }
 
+class WindMode_Provider extends ChangeNotifier {
+  WindMode_Model windMode_Model;
+
+  WindMode_Provider({
+    required this.windMode_Model,
+  });
+
+  AlternativeValue_Provided() async {
+    windMode_Model.isWind = !windMode_Model.isWind;
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+
+    await preferences.setBool("isWind", windMode_Model.isWind);
+
+    notifyListeners();
+  }
+}
+
 class NetWorkConnectivity_Provider extends ChangeNotifier {
   Connectivity connectivity = Connectivity();
 
@@ -82,12 +99,11 @@ class WeatherApi {
 
   static WeatherApi weatherApi = WeatherApi._();
 
-  Future<Post?> fetchSingleTonData() async {
+  Future<Post?> fetchSingleTonData({required String city}) async {
     String baseUrl = "http://api.weatherapi.com/v1/forecast.json";
     String key = "925228dcccd64c60a0d60359232405";
-    String city = "Surat";
 
-    String url = baseUrl + "?key=" + key + "&q=" + city;
+    String url = baseUrl + "?key=" + key + "&q=" + city+"&Surat";
     // String url = "https://api.weatherapi.com/v1/forecast.json?key=925228dcccd64c60a0d60359232405&q=Surat";
 
     http.Response res = await http.get(
@@ -96,9 +112,9 @@ class WeatherApi {
 
     if (res.statusCode == 200){
       Map decodedData = jsonDecode(res.body);
-      print('++++++++++++++++++++++++++++++++++');
-      print(decodedData['forecast']['forecastday'][0]['hour'][5]['icon']);
-      print('++++++++++++++++++++++++++++++++++');
+      // print('++++++++++++++++++++++++++++++++++');
+      // print(decodedData['forecast']['forecastday'][0]['hour'][5]['icon']);
+      // print('++++++++++++++++++++++++++++++++++');
 
       Post post = Post.data(data: decodedData);
 

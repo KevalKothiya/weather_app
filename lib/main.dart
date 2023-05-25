@@ -17,11 +17,13 @@ void main() async {
 
   bool isDark = await preferences.getBool('isDark') ?? false;
   bool isFarenheit = await preferences.getBool('isFarenheit') ?? false;
+  bool isWind = await preferences.getBool('isWind') ?? false;
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => DarkMode_Provider(darkMode_Model: DarkMode_Model(isDark: isDark))),
         ChangeNotifierProvider(create: (context) => FarenheitMode_Provider(farenheitMode_Model: FarenheitMode_Model(isFarenheit: isFarenheit))),
+        ChangeNotifierProvider(create: (context) => WindMode_Provider(windMode_Model: WindMode_Model(isWind: isWind))),
         ChangeNotifierProvider(create: (context) => NetWorkConnectivity_Provider(),),
       ],
       builder: (context, child) {

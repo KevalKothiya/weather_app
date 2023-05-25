@@ -14,6 +14,13 @@ class FarenheitMode_Model {
     required this.isFarenheit,
   });
 }
+class WindMode_Model {
+  bool isWind;
+
+  WindMode_Model({
+    required this.isWind,
+  });
+}
 
 class NetWorkConnectivity_Model {
   String netWorkStatus;

@@ -15,10 +15,11 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(
       Duration(seconds: 2),
       () {
-        Navigator.pushReplacementNamed(context, '/');
+        Navigator.of(context).pushReplacementNamed('/');
       },
     );
     return Scaffold(
+      backgroundColor: Colors.black,
       body: Container(
         alignment: Alignment.center,
         child: Column(
