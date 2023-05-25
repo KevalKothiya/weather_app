@@ -96,10 +96,9 @@ https://github.com/KevalKothiya/weather_app/assets/131429045/80e4895d-c0c9-45c5-
 
 <img align="left" src="https://github.com/KevalKothiya/weather_app/assets/131429045/c74630a2-fa8a-4aab-b5b8-3e053fa2ccbf" width="220px">
 <img align="left" src="https://github.com/KevalKothiya/weather_app/assets/131429045/85759696-72c5-4f95-b8f8-d3abfce9253f" width="220px">
-<img src="https://github.com/KevalKothiya/weather_app/assets/131429045/234e1c24-8aee-4f2b-9fba-17e1262a2dd8" width="220px">
+<img src="https://github.com/KevalKothiya/weather_app/assets/131429045/f77b5d04-872b-48d2-afad-5d621a510348" width="220px">
 
 <img align="left" src="https://github.com/KevalKothiya/weather_app/assets/131429045/1a458d54-ad6c-4460-bb49-40d34813917b" width="220px">
 <img align="left" src="https://github.com/KevalKothiya/weather_app/assets/131429045/a35ecf6f-9486-4f14-a479-fb31246af4cc" width="220px">
-<img src="https://github.com/KevalKothiya/weather_app/assets/131429045/f77b5d04-872b-48d2-afad-5d621a510348" width="220px">
 
 
