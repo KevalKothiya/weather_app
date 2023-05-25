@@ -34,55 +34,66 @@ class _HomeScreenState extends State<HomeScreen> {
     return SafeArea(
       child: Scaffold(
         floatingActionButtonLocation: FloatingActionButtonLocation.endContained,
-        bottomNavigationBar: Stack(
-          alignment: Alignment(0, -1.15),
-          children: [
-            Container(
-              height: 15.h,
-              width: double.infinity,
-              color: Color(0xff2b3f64),
-            ),
-            Divider(
-              color: Colors.grey,
-            ),
-          ],
+        bottomNavigationBar: SingleChildScrollView(
+          child: Stack(
+            alignment: const Alignment(0, -1.15),
+            children: [
+              Container(
+                height: 15.h,
+                width: double.infinity,
+                color: (Provider.of<DarkMode_Provider>(context, listen: false)
+                        .darkMode_Model
+                        .isDark)
+                    ? const Color(0xff2b3f64).withOpacity(
+                        0.1,
+                      )
+                    : const Color(0xff2b3f64).withOpacity(0.8),
+              ),
+              const Divider(
+                color: Colors.grey,
+              ),
+            ],
+          ),
         ),
         floatingActionButton: Container(
           padding: EdgeInsets.only(
             left: 5.w,
           ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextField(
-                controller: TextEditingController(),
-                onSubmitted: (val) {
-                  setState(() {
-                    fetch = WeatherApi.weatherApi.fetchSingleTonData(city: val);
-                  });
-                },
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextField(
+                  controller: TextEditingController(),
+                  onSubmitted: (val) {
+                    setState(() {
+                      fetch =
+                          WeatherApi.weatherApi.fetchSingleTonData(city: val);
+                    });
+                  },
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                  ),
                 ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      CupertinoIcons.map,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
+                        CupertinoIcons.map,
+                      ),
                     ),
-                  ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      CupertinoIcons.list_bullet,
+                    IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
+                        CupertinoIcons.list_bullet,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
         body: (Provider.of<NetWorkConnectivity_Provider>(context)
@@ -102,8 +113,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         (Provider.of<DarkMode_Provider>(context, listen: false)
                                 .darkMode_Model
                                 .isDark)
-                            ? AssetImage("assest/images/dark.gif")
-                            : AssetImage("assest/images/light.gif"),
+                            ? const AssetImage("assest/images/dark.gif")
+                            : const AssetImage("assest/images/light.gif"),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -122,13 +133,14 @@ class _HomeScreenState extends State<HomeScreen> {
                           SliverAppBar(
                             collapsedHeight: 14.h,
                             expandedHeight: 45.h,
+                            backgroundColor: Colors.black87,
                             centerTitle: true,
                             pinned: true,
                             leading: IconButton(
                               onPressed: () {
                                 print(data!.hour[0]['icon'].toString());
                               },
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.menu,
                               ),
                             ),
@@ -139,7 +151,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           listen: false)
                                       .AlternativeValue_Provided();
                                 },
-                                icon: Icon(
+                                icon: const Icon(
                                   CupertinoIcons.settings,
                                 ),
                               ),
@@ -150,12 +162,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                           listen: false)
                                       .darkMode_Model
                                       .isDark)
-                                  ? Image(
+                                  ? const Image(
                                       image:
                                           AssetImage("assest/images/dark.gif"),
                                       fit: BoxFit.cover,
                                     )
-                                  : Image(
+                                  : const Image(
                                       image:
                                           AssetImage("assest/images/light.gif"),
                                       fit: BoxFit.cover,
@@ -182,6 +194,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           : AppThemes.lightThemeData.textTheme
                                               .headlineLarge!
                                               .copyWith(
+                                              color: Colors.white,
                                               fontWeight: FontWeight.w300,
                                             ),
                                     ),
@@ -191,7 +204,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Spacer(
+                                        const Spacer(
                                           flex: 4,
                                         ),
                                         Text(
@@ -210,6 +223,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               : AppThemes.lightThemeData
                                                   .textTheme.headlineLarge!
                                                   .copyWith(
+                                                  color: Colors.white,
                                                   fontSize: 6.h,
                                                   fontWeight: FontWeight.w300,
                                                 ),
@@ -225,19 +239,19 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       .darkMode_Model
                                                       .isDark)
                                                   ? Colors.white
-                                                  : Colors.black,
+                                                  : Colors.white,
                                           child: CircleAvatar(
                                             radius: 0.65.h,
-                                            backgroundColor:
-                                                (Provider.of<DarkMode_Provider>(
-                                                            context)
-                                                        .darkMode_Model
-                                                        .isDark)
-                                                    ? Colors.black
-                                                    : Colors.white,
+                                            backgroundColor: (Provider.of<
+                                                            DarkMode_Provider>(
+                                                        context)
+                                                    .darkMode_Model
+                                                    .isDark)
+                                                ? Colors.black.withOpacity(0.5)
+                                                : Colors.black.withOpacity(0.5),
                                           ),
                                         ),
-                                        Spacer(
+                                        const Spacer(
                                           flex: 3,
                                         ),
                                       ],
@@ -256,7 +270,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               padding: EdgeInsets.symmetric(horizontal: 4.w),
                               child: Container(
                                 decoration: BoxDecoration(
-                                  color: Color(0xFF252847),
+                                  color: const Color(0xFF252847),
                                   borderRadius: BorderRadius.circular(4.h),
                                 ),
                                 padding: EdgeInsets.all(2.5.h),
@@ -285,7 +299,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 fontWeight: FontWeight.w100,
                                               ),
                                       ),
-                                      Divider(),
+                                      const Divider(),
                                       Container(
                                         height: 15.h,
                                         width: double.infinity,
@@ -303,7 +317,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   3.h,
                                                 ),
                                               ),
-                                              margin: EdgeInsets.all(5),
+                                              margin: const EdgeInsets.all(5),
                                               child: Column(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment
@@ -312,15 +326,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   (i < 10)
                                                       ? Text(
                                                           "0${i}:00",
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Colors.white),
+                                                          style:
+                                                              const TextStyle(
+                                                                  color: Colors
+                                                                      .white),
                                                         )
                                                       : Text(
                                                           "${i}:00",
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Colors.white),
+                                                          style:
+                                                              const TextStyle(
+                                                                  color: Colors
+                                                                      .white),
                                                         ),
                                                   Container(
                                                     height: 50,
@@ -364,7 +380,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         )
                                                       : Stack(
                                                           alignment:
-                                                              Alignment(2, -1),
+                                                              const Alignment(
+                                                                  2, -1),
                                                           children: [
                                                             Text(
                                                               data.hour[i]
@@ -441,7 +458,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 itemCount: 6,
                                 itemBuilder: (context, i) => Container(
                                   decoration: BoxDecoration(
-                                    color: Color(0xff2a3759),
+                                    color: const Color(0xff2a3759),
                                     borderRadius: BorderRadius.circular(
                                       2.h,
                                     ),
@@ -464,7 +481,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         SizedBox(
                                                           width: 4.w,
                                                         ),
-                                                        Icon(
+                                                        const Icon(
                                                           CupertinoIcons
                                                               .sunset_fill,
                                                           color:
@@ -487,7 +504,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                   .textTheme
                                                                   .headlineLarge!
                                                                   .copyWith(
-                                                                  color: Color(
+                                                                  color: const Color(
                                                                       0xff4c5372),
                                                                 )
                                                               : AppThemes
@@ -495,7 +512,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                   .textTheme
                                                                   .headlineLarge!
                                                                   .copyWith(
-                                                                  color: Color(
+                                                                  color: const Color(
                                                                       0xff4c5372),
                                                                 ),
                                                         ),
@@ -549,7 +566,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     Container(
                                                       height: 2.h,
                                                       width: 2.w,
-                                                      decoration: BoxDecoration(
+                                                      decoration:
+                                                          const BoxDecoration(
                                                         shape: BoxShape.circle,
                                                         color: Colors.white,
                                                         boxShadow: [
@@ -564,7 +582,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     SizedBox(
                                                       height: 1.h,
                                                     ),
-                                                    Divider(),
+                                                    const Divider(),
                                                     SizedBox(
                                                       height: 1.h,
                                                     ),
@@ -651,7 +669,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         SizedBox(
                                                           width: 4.w,
                                                         ),
-                                                        Icon(
+                                                        const Icon(
                                                           CupertinoIcons
                                                               .sun_max_fill,
                                                           color:
@@ -674,7 +692,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                   .textTheme
                                                                   .headlineLarge!
                                                                   .copyWith(
-                                                                  color: Color(
+                                                                  color: const Color(
                                                                       0xff4c5372),
                                                                 )
                                                               : AppThemes
@@ -682,7 +700,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                   .textTheme
                                                                   .headlineLarge!
                                                                   .copyWith(
-                                                                  color: Color(
+                                                                  color: const Color(
                                                                       0xff4c5372),
                                                                 ),
                                                         ),
@@ -775,7 +793,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     ),
                                                     Stack(
                                                       alignment:
-                                                          Alignment(0, 0),
+                                                          const Alignment(0, 0),
                                                       children: [
                                                         Container(
                                                           height: 0.5.h,
@@ -783,7 +801,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                           decoration:
                                                               BoxDecoration(
                                                             gradient:
-                                                                LinearGradient(
+                                                                const LinearGradient(
                                                               colors: [
                                                                 Colors.green,
                                                                 Colors.yellow,
@@ -803,7 +821,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         Container(
                                                           height: 0.5.h,
                                                           decoration:
-                                                              BoxDecoration(
+                                                              const BoxDecoration(
                                                             shape:
                                                                 BoxShape.circle,
                                                             color: Colors.white,
@@ -848,7 +866,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                             .w100,
                                                                   ),
                                                           ),
-                                                          TextSpan(
+                                                          const TextSpan(
                                                               text: " 16:30"),
                                                         ],
                                                       ),
@@ -868,7 +886,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     SizedBox(
                                                       width: 4.w,
                                                     ),
-                                                    Icon(
+                                                    const Icon(
                                                       CupertinoIcons.wind,
                                                       color: Color(0xff4c5372),
                                                     ),
@@ -888,7 +906,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                               .textTheme
                                                               .headlineLarge!
                                                               .copyWith(
-                                                              color: Color(
+                                                              color: const Color(
                                                                   0xff4c5372),
                                                             )
                                                           : AppThemes
@@ -896,7 +914,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                               .textTheme
                                                               .headlineLarge!
                                                               .copyWith(
-                                                              color: Color(
+                                                              color: const Color(
                                                                   0xff4c5372),
                                                             ),
                                                     ),
@@ -1066,7 +1084,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         SizedBox(
                                                           width: 4.w,
                                                         ),
-                                                        Icon(
+                                                        const Icon(
                                                           CupertinoIcons
                                                               .thermometer,
                                                           color:
@@ -1089,7 +1107,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                   .textTheme
                                                                   .headlineLarge!
                                                                   .copyWith(
-                                                                  color: Color(
+                                                                  color: const Color(
                                                                       0xff4c5372),
                                                                 )
                                                               : AppThemes
@@ -1097,7 +1115,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                   .textTheme
                                                                   .headlineLarge!
                                                                   .copyWith(
-                                                                  color: Color(
+                                                                  color: const Color(
                                                                       0xff4c5372),
                                                                 ),
                                                         ),
@@ -1114,7 +1132,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                           CrossAxisAlignment
                                                               .start,
                                                       children: [
-                                                        Spacer(
+                                                        const Spacer(
                                                           flex: 3,
                                                         ),
                                                         Text(
@@ -1172,7 +1190,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                         .black,
                                                           ),
                                                         ),
-                                                        Spacer(
+                                                        const Spacer(
                                                           flex: 3,
                                                         ),
                                                       ],
@@ -1233,7 +1251,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         SizedBox(
                                                           width: 4.w,
                                                         ),
-                                                        Icon(
+                                                        const Icon(
                                                           CupertinoIcons
                                                               .hurricane,
                                                           color:
@@ -1256,7 +1274,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                   .textTheme
                                                                   .headlineLarge!
                                                                   .copyWith(
-                                                                  color: Color(
+                                                                  color: const Color(
                                                                       0xff4c5372),
                                                                 )
                                                               : AppThemes
@@ -1264,7 +1282,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                   .textTheme
                                                                   .headlineLarge!
                                                                   .copyWith(
-                                                                  color: Color(
+                                                                  color: const Color(
                                                                       0xff4c5372),
                                                                 ),
                                                         ),
@@ -1395,7 +1413,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     SizedBox(
                                                       width: 4.w,
                                                     ),
-                                                    Icon(
+                                                    const Icon(
                                                       CupertinoIcons
                                                           .cloud_bolt_rain_fill,
                                                       color: Color(0xff4c5372),
@@ -1416,7 +1434,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                               .textTheme
                                                               .headlineLarge!
                                                               .copyWith(
-                                                              color: Color(
+                                                              color: const Color(
                                                                   0xff4c5372),
                                                             )
                                                           : AppThemes
@@ -1424,7 +1442,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                               .textTheme
                                                               .headlineLarge!
                                                               .copyWith(
-                                                              color: Color(
+                                                              color: const Color(
                                                                   0xff4c5372),
                                                             ),
                                                     ),
@@ -1544,7 +1562,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                           .w100,
                                                                 ),
                                                         ),
-                                                        TextSpan(text: " 10 "),
+                                                        const TextSpan(
+                                                            text: " 10 "),
                                                         TextSpan(
                                                           text: "days",
                                                           style: (Provider.of<
@@ -1595,7 +1614,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       );
                     } else {
-                      return Center(
+                      return const Center(
                         child: CupertinoActivityIndicator(),
                       );
                     }
