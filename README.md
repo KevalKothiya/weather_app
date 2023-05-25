@@ -102,7 +102,6 @@ https://github.com/KevalKothiya/weather_app/assets/131429045/80e4895d-c0c9-45c5-
 
 <p>
 
-<img align="left" src="https://github.com/KevalKothiya/weather_app/assets/131429045/1a458d54-ad6c-4460-bb49-40d34813917b" width="220px">
 <img align="left" src="https://github.com/KevalKothiya/weather_app/assets/131429045/a35ecf6f-9486-4f14-a479-fb31246af4cc" width="220px">
   </p>
 
